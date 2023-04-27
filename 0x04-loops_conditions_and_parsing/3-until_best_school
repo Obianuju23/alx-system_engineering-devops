@@ -3,8 +3,8 @@
 
 a=0
 
-until [ $a -le 9 ]
+until [ $a -eq 10 ]
 do
 	echo "Best School"
-	a=$((a + 1))
+	((a++))
 done

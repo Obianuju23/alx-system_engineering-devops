@@ -1,4 +1,4 @@
 #!/usr/bin/env bash
 #This BashScript that stops 4-to_infinity_and_beyond process.
 
-pkill -l5 "bash ./4-to_infinity_and_beyond" -f
+pkill "bash ./4-to_infinity_and_beyond" -f

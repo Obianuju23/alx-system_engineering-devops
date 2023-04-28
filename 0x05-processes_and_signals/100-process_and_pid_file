@@ -21,12 +21,12 @@ function sigquit_handler {
 	exit 0
 }
 
-	echo "To infinity and beyond!"
- while true; do
- 	sleep 2
 
 trap sigterm_handler SIGTERM
 trap sigint_handler SIGINT
 trap sigquit_handler SIGQUIT
 
+while true; do
+	echo "To infinity and beyond!"
+	sleep 2
 done

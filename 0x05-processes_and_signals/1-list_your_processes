@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+#This Bash Script displays a list of currently running processes
+
+
+ps faux

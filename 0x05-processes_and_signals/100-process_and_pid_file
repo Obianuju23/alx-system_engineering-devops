@@ -6,7 +6,7 @@
 #Deletes the file and terminates itself when recieving SIGQUIT signal
 
 
-echo $$ > /var/run/myscript.pid
+echo $$ >> /var/run/myscript.pid
 
 function sigterm_handler {
 	trap echo "I hate the kill command"
@@ -14,7 +14,7 @@ function sigterm_handler {
 	exit 0
 }
 function sigint_handler {
-	echo "Y U no love me?!"
+	echo "Y U no love me!"
 }
 function sigquit_handler {
 	rm -rf /var/run/myscript.pid;

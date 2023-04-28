@@ -6,7 +6,7 @@
 #Deletes the file and terminates itself when recieving SIGQUIT signal
 
 
-echo $$ >> /var/run/myscript.pid
+echo "$$" > /var/run/myscript.pid
 
 function sigterm_handler {
 	trap echo "I hate the kill command"
@@ -22,9 +22,9 @@ function sigquit_handler {
 }
 
 
-trap sigterm_handler SIGTERM
-trap sigint_handler SIGINT
-trap sigquit_handler SIGQUIT
+trap 'sigterm_handler' SIGTERM
+trap 'sigint_handler' SIGINT
+trap 'sigquit_handler' SIGQUIT
 
 while true; do
 	echo "To infinity and beyond"

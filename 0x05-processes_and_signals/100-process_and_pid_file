@@ -27,6 +27,6 @@ trap sigint_handler SIGINT
 trap sigquit_handler SIGQUIT
 
 while true; do
-	echo "To infinity and beyond!"
+	echo "To infinity and beyond"
 	sleep 2
 done

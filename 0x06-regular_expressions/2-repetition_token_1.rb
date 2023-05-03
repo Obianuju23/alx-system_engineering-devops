@@ -3,4 +3,4 @@
 This is a Ruby Script using regexp to match cases as shown in the example that accepts one argument and pass it to a regular expression matching method
 """
 
-puts ARGV[0].scan(/h[b]tn/).join
+puts ARGV[0].scan(/hb?tn/).join

@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+#Script for SSH Configuration for server connection without a password
+#Host remote_alias
+#    HostName remote_host
+#    Port port_num
+
+Host 205663-web-01
+    HostName 100.26.253.193
+    IdentityFile ~/.ssh/school
+    PasswordAuthentication no

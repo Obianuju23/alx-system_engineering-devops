@@ -1,4 +1,4 @@
-#!/usr/bin/env/bash
+#!/usr/bin/env bash
 #Sript that connects to the server using private key
 #ssh-copy-id username@remote_host
 

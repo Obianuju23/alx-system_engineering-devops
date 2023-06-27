@@ -1,0 +1,22 @@
+#!/usr/bin/env bash
+#this  shebang tells the system to use the Bash shell to execute the script.
+
+# Update package lists
+sudo apt-get -y update
+
+# Install Nginx
+sudo apt-get -y install nginx
+sudo ufw allow 'Nginx HTTP'
+
+
+# Create a default HTML file
+echo "Hello World!" > /var/www/html/index.html
+
+#testing nginx configurations
+
+sudo nginx -t
+sudo service nginx start
+
+
+# Restart Nginx
+sudo /etc/init.d/nginx restart

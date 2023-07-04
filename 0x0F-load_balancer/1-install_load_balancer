@@ -1,0 +1,21 @@
+#!/usr/bin/env bash
+# install in a new Ubuntu machine HAProxy with the following requirements
+# Configure HAproxy so that it send traffic to web-01 and web-02
+# Distribute requests using a roundrobin algorithm
+# Make sure that HAproxy can be managed via an init script
+
+two_servers="\\\nlisten webservers\n\tbind :80\n\tmode http\n\tbalance roundrobin\n\toption httpclose\n\toption forwardfor\n\tserver 205663-web-01 100.26.253.193:80 check\n\tserver 205663-web-02 54.237.112.101:80 check\n"
+
+sudo apt-get install --no-install-recommends software-properties-common
+sudo add-apt-repository -y ppa:vbernat/haproxy-2.0
+sudo apt-get -y install haproxy
+
+sudo sed -i "\$a ENABLED=1\n" /etc/default/haproxy
+
+
+sudo cp /etc/haproxy/haproxy.cfg  /etc/haproxy/haproxy.cfg.backup
+
+sudo sed -i "\$a $two_servers" /etc/haproxy/haproxy.cfg
+
+sudo /etc/init.d/nginx stop
+sudo /etc/init.d/haproxy restart

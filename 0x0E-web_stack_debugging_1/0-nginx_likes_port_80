@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+#This debugging solves the problem of nginx not able to connect with port 80
+#which was as a result of difference in sites-enabled and sites-available
+#I resolved debugged by deleting the file in sites-enabled and made a new file there which is a symbolic link to sites-available
+
+sudo rm /etc/nginx/sites-enabled/default
+sudo ln -s /etc/nginx/sites-available/default /etc/nginx/sites-enabled/default
+sudo /etc/init.d/nginx restart

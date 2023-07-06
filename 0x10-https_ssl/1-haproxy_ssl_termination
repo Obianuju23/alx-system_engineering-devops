@@ -52,6 +52,3 @@
          redirect scheme https code 301 if !{ ssl_fc }
          server 220652-web-01 100.26.253.193:80 check
          server 205663-web-02 54.237.112.101:80 check
-
- backend letsencrypt-backend
-         server letsencrypt 127.0.0.1:54321

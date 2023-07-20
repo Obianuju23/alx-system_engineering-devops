@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
 # Bash script that accepts one argument as a specified user&runs the script
 
+sudo useradd -m -s /bin/bash "syslog"
 su "$1" -s /bin/bash -c 'whoami'

@@ -7,7 +7,7 @@
 # redirection must be 301 Moved Permanently
 # 404 error page must custo to print something
 
-new_redirect="\tlocation /redirect_me {\n\t\t return 301 https://linkedin.com/in/sanni-omoba;\n\t}\n"
+new_redirect="\tlocation /redirect_me {\n\t\t return 301 https://linkedin.com/in/christiana-aghara;\n\t}\n"
 input_after="# pass PHP scripts to FastCGI server"
 new_input="\\\terror_page 404 /404.html;\n\tlocation /404.html {\n\t\tinternal;\n\t}\n"
 

@@ -2,7 +2,7 @@
 """Bash script that uses REST API, for a given employee ID,
 and also returns information about his/her TODO list progress."""
 import requests as req
-import sys
+from sys import argv
 
 if __name__ == '__main__':
     url = 'https://jsonplaceholder.typicode.com/'

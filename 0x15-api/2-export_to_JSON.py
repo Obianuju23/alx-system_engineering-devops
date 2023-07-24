@@ -24,7 +24,7 @@ if __name__ == "__main__":
     usr = employeeName.json()['username']
 
     totalTasks = []
-    updateUser = {}
+    Json_data = {}
 
     for all_Emp in json_req:
         totalTasks.append(

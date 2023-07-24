@@ -1,6 +1,8 @@
 #!/usr/bin/python3
 """Bash script that uses REST API, for a given employee ID,
 and also returns information about his/her TODO list progress."""
+
+
 import requests as req
 import  sys
 

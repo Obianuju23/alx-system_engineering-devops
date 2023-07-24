@@ -3,7 +3,7 @@
 A Python script that uses REST API, for given set of employers ID,
 returns his/her TODO list and exports data in the CSV format and
 """
-    
+
 
 import csv
 import json

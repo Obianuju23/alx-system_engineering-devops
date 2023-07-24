@@ -5,14 +5,27 @@ import requests as req
 import  sys
 
 if __name__ == '__main__':
-    url = 'https://jsonplaceholder.typicode.com/'
-    usr_id = req.get(url + 'users/{}'.format(sys.argv[1])).json()
-    to_do = req.get(url + 'todos', params={'userId': sys.argv[1]}).json()
-#    print(to_do)
-    completed = [title.get("title") for title in to_do if
-                 title.get('completed') is True]
-    print(completed)
-    print("Employee {} is done with tasks({}/{}):".format(usr_id.get("name"),
-                                                          len(completed),
-                                                          len(to_do)))
-    [print("\t {}".format(c)) for c in completed]
+    url_base = 'https://jsonplaceholder.typicode.com/'
+    usr_id = int(sys.argv[1]))
+    url = url_base + 'users/' + str(usr_id)
+    
+    response = req.get(url)
+    name = response.json().get('name')
+
+    todo_Url = url + "/todos"
+    response = req.get(todo_Url)
+    tasks = response.json()
+    completed_tasks = []
+    completed = 0
+    
+    
+    for task in tasks:
+        if task.get('completed') is True:
+            completed_tasks.append(task)
+            completed += 1
+
+    print("Employee {} is done with tasks({}/{}):"
+          .format(name, completed, len(tasks)))
+
+    for task in completed_tasks:
+        print("\t {}".format(task.get('title')))

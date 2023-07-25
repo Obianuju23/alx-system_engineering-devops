@@ -9,7 +9,6 @@ import json
 import requests
 from sys import argv
 
-
 if __name__ == "__main__":
 
     import json

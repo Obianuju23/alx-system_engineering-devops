@@ -9,8 +9,13 @@ import json
 import requests
 from sys import argv
 
+
 if __name__ == "__main__":
 
+    import json
+    import requests
+    import sys
+    
     users = requests.get("https://jsonplaceholder.typicode.com/users")
     users = users.json()
     todos = requests.get('https://jsonplaceholder.typicode.com/todos')

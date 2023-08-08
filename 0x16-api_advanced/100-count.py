@@ -7,48 +7,46 @@ import requests
 from collections import Counter
 
 
-def count_words(subreddit, word_list, instances={}, after="", count=0):
+def count_words(subreddit, word_list, after=none, count=none):
     """Function that count words found in hot posts using REDDIT API
     Args:
         subreddit (str): The subreddit to search.
         word_list (list): The list of words to search for in post titles.
-        instances (obj): Key/value pairs of words/counts.
         after (str): The parameter for the next page of the API results.
         count (int): The parameter of results matched thus far.
     """
 
-    url = "https://www.reddit.com/r/{}/hot/.json".format(subreddit)
-    headers = {'User-Agent': 'My Customised User Agent'}
-    parameters = {"after": after, "limit": 100, "count": count}
-
+    if count is None:
+        count = Counter()
+    url = "https://www.reddit.com/r/{}/hot.json".format(subreddit)
+    if after:
+        parameters = {"after": after}
+    else:
+        parameters = {}
+    headers = requests.utils.default_headers()
+    headers.update({'User-Agent': 'My Customised User Agent 1.0'})
     response = requests.get(url, headers=headers, params=parameters,
                             allow_redirects=False)
-    try:
-        results = response.json()
-        if response.status_code == 404:
-            raise Exception
-    except Exception:
-        print("")
-        return
+    if response.status_code == 200:
+        result = response.json()
+        hots = result['data']['children']
+        for item in hots:
+            title = item['data']['title']
+            translator = str.maketrans('', '', '.,!?()[]{}"\'')
+            words_in_title = [word.translate(translator) for word in
+            title.lower().split()]
+            lower_word_list = set(w.lower() for w in word_list)
+            for word in words_in_title:
+                if word in lower_word_list:
+                    count[word] += 1
 
-    results = results.get("data")
-    after = results.get("after")
-    count += results.get("dist")
-    for c in results.get("children"):
-        title = c.get("data").get("title").lower().split()
-        for word in word_list:
-            if word.lower() in title:
-                times = len([t for t in title if t == word.lower()])
-                if instances.get(word) is None:
-                    instances[word] = times
-                else:
-                    instances[word] += times
-
-    if after is None:
-        if len(instances) == 0:
-            print("")
-            return
-        instances = sorted(instances.items(), key=lambda kv: (-kv[1], kv[0]))
-        [print("{}: {}".format(k, v)) for k, v in instances]
+        after = result['data']['after']
+        if after:
+            return count_words(subreddit, word_list, after, count)
+        else:
+            sorted_counts = sorted(count.items(), key=lambda x: (-x[1], x[0]))
+            for w, c in sorted_counts:
+                print("{}: {}".format(w, c))
+            return count
     else:
-        count_words(subreddit, word_list, instances, after, count)
+        return None

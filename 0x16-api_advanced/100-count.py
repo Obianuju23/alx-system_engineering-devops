@@ -7,7 +7,7 @@ import requests
 from collections import Counter
 
 
-def count_words(subreddit, word_list, after=none, count=none):
+def count_words(subreddit, word_list, after=None, count=None):
     """Function that count words found in hot posts using REDDIT API
     Args:
         subreddit (str): The subreddit to search.

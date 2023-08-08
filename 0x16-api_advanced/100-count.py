@@ -8,24 +8,17 @@ from collections import Counter
 
 
 def count_words(subreddit, word_list, after=None, count=None):
-    """Function that count words found in hot posts using REDDIT API
-    Args:
-        subreddit (str): The subreddit to search.
-        word_list (list): The list of words to search for in post titles.
-        after (str): The parameter for the next page of the API results.
-        count (int): The parameter of results matched thus far.
-    """
-
+    """a recursive function"""
     if count is None:
         count = Counter()
     url = "https://www.reddit.com/r/{}/hot.json".format(subreddit)
     if after:
-        parameters = {"after": after}
+        params = {"after": after}
     else:
-        parameters = {}
+        params = {}
     headers = requests.utils.default_headers()
-    headers.update({'User-Agent': 'My Customised User Agent 1.0'})
-    response = requests.get(url, headers=headers, params=parameters,
+    headers.update({'User-Agent': 'My User Agent 1.0'})
+    response = requests.get(url, headers=headers, params=params,
                             allow_redirects=False)
     if response.status_code == 200:
         result = response.json()
@@ -33,8 +26,7 @@ def count_words(subreddit, word_list, after=None, count=None):
         for item in hots:
             title = item['data']['title']
             translator = str.maketrans('', '', '.,!?()[]{}"\'')
-            words_in_title = [word.translate(translator) for word in
-            title.lower().split()]
+            words_in_title = [word.translate(translator) for word in title.lower().split()]
             lower_word_list = set(w.lower() for w in word_list)
             for word in words_in_title:
                 if word in lower_word_list:
